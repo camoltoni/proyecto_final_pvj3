@@ -1,0 +1,24 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float time : hint_range(0.0, 1.0) = 0.0;
+uniform float leftright : hint_range(-1.0, 1.0, 1.0) = 1.0;
+uniform vec4 from_color = vec4(0.1, 0.1, 0.1, 1.0);
+uniform vec4 to_color = vec4(0.1, 0.1, 0.1, 1.0);
+
+void fragment() {
+    vec2 uv = UV;
+    // vec4 from_color = COLOR;
+    // vec4 to_color = wipe_color;
+    vec4 color = mix(from_color, to_color, smoothstep(time + 0.001 * leftright, time, uv.x));
+    COLOR = color;
+}"
+
+[resource]
+shader = SubResource( 1 )
+shader_param/time = 0.0
+shader_param/leftright = 1.0
+shader_param/from_color = Plane( 0.1, 0.1, 0.1, 1 )
+shader_param/to_color = Plane( 0.1, 0.1, 0.1, 1 )
