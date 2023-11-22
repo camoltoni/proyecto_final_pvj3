@@ -1,5 +1,5 @@
 class_name Wipe
-extends Control
+extends CanvasLayer
 
 signal wipe_ended
 
@@ -21,6 +21,7 @@ func _ready():
 	$ColorRect.material.set_shader_param("leftright", leftright)
 	$ColorRect.material.set_shader_param("to_color", to_color)
 	$ColorRect.material.set_shader_param("from_color", from_color)
+	
 func _process(delta):
 	if time > 1.0  + margin or time < -margin:
 		emit_signal("wipe_ended")

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://screens/transitions/Wipe.tres" type="Material" id=1]
+[ext_resource path="res://screens/transitions/Wipe.gd" type="Script" id=2]
+
+[node name="Wipe" type="CanvasLayer"]
+script = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = ExtResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0

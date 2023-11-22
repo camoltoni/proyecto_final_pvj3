@@ -1,7 +1,32 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://screens/BaseScreen.tscn" type="PackedScene" id=1]
-[ext_resource path="res://screens/GameScreen.gd" type="Script" id=3]
+[ext_resource path="res://screens/transitions/Wipe.tscn" type="PackedScene" id=2]
 
-[node name="GameScreen" instance=ExtResource( 1 )]
-script = ExtResource( 3 )
+[sub_resource type="GDScript" id=1]
+script/source = "extends \"res://screens/BaseScreen.gd\"
+
+func _process(_delta):
+	if Input.is_action_pressed(\"ui_accept\"):
+		emit_signal(\"scene_ended\")
+
+"
+
+[node name="GameScreen" type="Node2D"]
+script = SubResource( 1 )
+Transition = ExtResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -269.0
+margin_top = -71.5
+margin_right = 269.0
+margin_bottom = 71.5
+theme_type_variation = "h1"
+text = "In GAME"
+align = 1
+autowrap = true
