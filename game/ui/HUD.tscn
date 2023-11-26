@@ -1,7 +1,170 @@
-[gd_scene format=2]
+[gd_scene load_steps=7 format=2]
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[ext_resource path="res://assets/ui/walk2.png" type="Texture" id=1]
+[ext_resource path="res://assets/ui/eavesdropping.png" type="Texture" id=2]
+[ext_resource path="res://assets/ui/policeman.png" type="Texture" id=3]
+[ext_resource path="res://assets/ui/CN_zero_banner_Null_close_button.png" type="Texture" id=4]
+[ext_resource path="res://effects/HUD.gdshader" type="Shader" id=5]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 5 )
+
+[node name="HUD" type="CanvasLayer"]
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchor_right = 1.0
-margin_bottom = 14.0
+margin_bottom = 64.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+margin_right = 1280.0
+margin_bottom = 64.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer"]
+margin_right = 248.0
+margin_bottom = 64.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/MarginContainer"]
+margin_right = 248.0
+margin_bottom = 64.0
+size_flags_horizontal = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+margin_right = 80.0
+margin_bottom = 64.0
+theme_type_variation = "MarginContainerIcon"
+
+[node name="guard" type="TextureRect" parent="PanelContainer/HBoxContainer/MarginContainer/HBoxContainer/MarginContainer"]
+material = SubResource( 2 )
+margin_left = 16.0
+margin_top = 8.0
+margin_right = 64.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+texture = ExtResource( 3 )
+stretch_mode = 6
+flip_h = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+margin_left = 84.0
+margin_right = 164.0
+margin_bottom = 64.0
+theme_type_variation = "MarginContainerIcon"
+
+[node name="steps" type="TextureRect" parent="PanelContainer/HBoxContainer/MarginContainer/HBoxContainer/MarginContainer2"]
+margin_left = 16.0
+margin_top = 8.0
+margin_right = 64.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+texture = ExtResource( 1 )
+stretch_mode = 6
+flip_h = true
+
+[node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+margin_left = 168.0
+margin_right = 248.0
+margin_bottom = 64.0
+theme_type_variation = "MarginContainerIcon"
+
+[node name="ear" type="TextureRect" parent="PanelContainer/HBoxContainer/MarginContainer/HBoxContainer/MarginContainer3"]
+margin_left = 16.0
+margin_top = 8.0
+margin_right = 64.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+texture = ExtResource( 2 )
+stretch_mode = 6
+
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/HBoxContainer"]
+margin_left = 252.0
+margin_right = 860.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+
+[node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/HBoxContainer"]
+margin_left = 864.0
+margin_right = 1280.0
+margin_bottom = 64.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/MarginContainer3"]
+margin_right = 416.0
+margin_bottom = 64.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/MarginContainer3/HBoxContainer"]
+margin_right = 80.0
+margin_bottom = 64.0
+theme_type_variation = "MarginContainerIcon"
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/MarginContainer3/HBoxContainer/MarginContainer"]
+margin_left = 16.0
+margin_top = 8.0
+margin_right = 64.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+texture = ExtResource( 4 )
+stretch_mode = 6
+flip_h = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/HBoxContainer/MarginContainer3/HBoxContainer"]
+margin_left = 84.0
+margin_right = 164.0
+margin_bottom = 64.0
+theme_type_variation = "MarginContainerIcon"
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/MarginContainer3/HBoxContainer/MarginContainer2"]
+margin_left = 16.0
+margin_top = 8.0
+margin_right = 64.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+texture = ExtResource( 4 )
+stretch_mode = 6
+flip_h = true
+
+[node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/HBoxContainer/MarginContainer3/HBoxContainer"]
+margin_left = 168.0
+margin_right = 248.0
+margin_bottom = 64.0
+theme_type_variation = "MarginContainerIcon"
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/MarginContainer3/HBoxContainer/MarginContainer3"]
+margin_left = 16.0
+margin_top = 8.0
+margin_right = 64.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+texture = ExtResource( 4 )
+stretch_mode = 6
+flip_h = true
+
+[node name="MarginContainer4" type="MarginContainer" parent="PanelContainer/HBoxContainer/MarginContainer3/HBoxContainer"]
+margin_left = 252.0
+margin_right = 332.0
+margin_bottom = 64.0
+theme_type_variation = "MarginContainerIcon"
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/MarginContainer3/HBoxContainer/MarginContainer4"]
+margin_left = 16.0
+margin_top = 8.0
+margin_right = 64.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+texture = ExtResource( 4 )
+stretch_mode = 6
+flip_h = true
+
+[node name="MarginContainer5" type="MarginContainer" parent="PanelContainer/HBoxContainer/MarginContainer3/HBoxContainer"]
+margin_left = 336.0
+margin_right = 416.0
+margin_bottom = 64.0
+theme_type_variation = "MarginContainerIcon"
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/MarginContainer3/HBoxContainer/MarginContainer5"]
+margin_left = 16.0
+margin_top = 8.0
+margin_right = 64.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+texture = ExtResource( 4 )
+stretch_mode = 6
+flip_h = true
