@@ -1,13 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/ui/walk2.png" type="Texture" id=1]
-[ext_resource path="res://assets/ui/eavesdropping.png" type="Texture" id=2]
-[ext_resource path="res://assets/ui/policeman.png" type="Texture" id=3]
-[ext_resource path="res://assets/ui/CN_zero_banner_Null_close_button.png" type="Texture" id=4]
-[ext_resource path="res://effects/HUD.gdshader" type="Shader" id=5]
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = ExtResource( 5 )
+[ext_resource path="res://assets/icons/walk2.png" type="Texture" id=1]
+[ext_resource path="res://assets/icons/eavesdropping.png" type="Texture" id=2]
+[ext_resource path="res://ui/AlertIcon.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/icons/CN_zero_banner_Null_close_button.png" type="Texture" id=4]
 
 [node name="HUD" type="CanvasLayer"]
 
@@ -33,16 +29,8 @@ margin_right = 80.0
 margin_bottom = 64.0
 theme_type_variation = "MarginContainerIcon"
 
-[node name="guard" type="TextureRect" parent="PanelContainer/HBoxContainer/MarginContainer/HBoxContainer/MarginContainer"]
-material = SubResource( 2 )
-margin_left = 16.0
-margin_top = 8.0
-margin_right = 64.0
-margin_bottom = 56.0
-size_flags_horizontal = 3
-texture = ExtResource( 3 )
-stretch_mode = 6
-flip_h = true
+[node name="AlertIcon" parent="PanelContainer/HBoxContainer/MarginContainer/HBoxContainer/MarginContainer" instance=ExtResource( 3 )]
+material = null
 
 [node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/HBoxContainer/MarginContainer/HBoxContainer"]
 margin_left = 84.0

@@ -9,10 +9,10 @@ uniform vec4 from_color = vec4(0.1, 0.1, 0.1, 1.0);
 uniform vec4 to_color = vec4(0.1, 0.1, 0.1, 1.0);
 
 void fragment() {
-    vec2 uv = UV;
+    // vec2 uv = UV;
     // vec4 from_color = COLOR;
     // vec4 to_color = wipe_color;
-    vec4 color = mix(from_color, to_color, smoothstep(time + 0.001 * leftright, time, uv.x));
+    vec4 color = mix(from_color, to_color, smoothstep(time + 0.001 * leftright, time, UV.x));
     COLOR = color;
 }"
 
