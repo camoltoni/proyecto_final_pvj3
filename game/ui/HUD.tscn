@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/icons/walk2.png" type="Texture" id=1]
 [ext_resource path="res://assets/icons/eavesdropping.png" type="Texture" id=2]
-[ext_resource path="res://ui/AlertIcon.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ui/IconAlert.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/icons/CN_zero_banner_Null_close_button.png" type="Texture" id=4]
+[ext_resource path="res://assets/icons/policeman.png" type="Texture" id=5]
+[ext_resource path="res://ui/HUD.gd" type="Script" id=7]
 
 [node name="HUD" type="CanvasLayer"]
+script = ExtResource( 7 )
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchor_right = 1.0
@@ -29,8 +32,13 @@ margin_right = 80.0
 margin_bottom = 64.0
 theme_type_variation = "MarginContainerIcon"
 
-[node name="AlertIcon" parent="PanelContainer/HBoxContainer/MarginContainer/HBoxContainer/MarginContainer" instance=ExtResource( 3 )]
-material = null
+[node name="police" parent="PanelContainer/HBoxContainer/MarginContainer/HBoxContainer/MarginContainer" instance=ExtResource( 3 )]
+margin_left = 16.0
+margin_top = 8.0
+margin_right = 64.0
+margin_bottom = 56.0
+texture = ExtResource( 5 )
+level_color = Color( 1, 0, 0, 1 )
 
 [node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/HBoxContainer/MarginContainer/HBoxContainer"]
 margin_left = 84.0
@@ -38,15 +46,13 @@ margin_right = 164.0
 margin_bottom = 64.0
 theme_type_variation = "MarginContainerIcon"
 
-[node name="steps" type="TextureRect" parent="PanelContainer/HBoxContainer/MarginContainer/HBoxContainer/MarginContainer2"]
+[node name="steps" parent="PanelContainer/HBoxContainer/MarginContainer/HBoxContainer/MarginContainer2" instance=ExtResource( 3 )]
 margin_left = 16.0
 margin_top = 8.0
 margin_right = 64.0
 margin_bottom = 56.0
-size_flags_horizontal = 3
 texture = ExtResource( 1 )
-stretch_mode = 6
-flip_h = true
+level_color = Color( 1, 1, 0, 1 )
 
 [node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/HBoxContainer/MarginContainer/HBoxContainer"]
 margin_left = 168.0
@@ -54,14 +60,13 @@ margin_right = 248.0
 margin_bottom = 64.0
 theme_type_variation = "MarginContainerIcon"
 
-[node name="ear" type="TextureRect" parent="PanelContainer/HBoxContainer/MarginContainer/HBoxContainer/MarginContainer3"]
+[node name="ear" parent="PanelContainer/HBoxContainer/MarginContainer/HBoxContainer/MarginContainer3" instance=ExtResource( 3 )]
 margin_left = 16.0
 margin_top = 8.0
 margin_right = 64.0
 margin_bottom = 56.0
-size_flags_horizontal = 3
 texture = ExtResource( 2 )
-stretch_mode = 6
+level_color = Color( 1, 0, 1, 1 )
 
 [node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/HBoxContainer"]
 margin_left = 252.0
@@ -156,3 +161,8 @@ size_flags_horizontal = 3
 texture = ExtResource( 4 )
 stretch_mode = 6
 flip_h = true
+
+[node name="TestTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="TestTimer" to="." method="_on_TestTimer_timeout"]
