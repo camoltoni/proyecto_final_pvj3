@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://screens/transition/transition.gd" type="Script" id=1]
+[ext_resource path="res://screens/transition/grow_shadermaterial.tres" type="Material" id=2]
+
+[node name="Transition" type="ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0313726, 0.0313726, 0.0470588, 1 )
+script = ExtResource( 1 )
+shader_material = ExtResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

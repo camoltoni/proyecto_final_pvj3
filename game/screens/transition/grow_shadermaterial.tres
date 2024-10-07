@@ -1,0 +1,20 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float os_time = 0.0;
+uniform float duration = 1.0;
+
+void fragment() {
+	float ratio = SCREEN_PIXEL_SIZE.y/SCREEN_PIXEL_SIZE.x;
+	float cicles = (1.0 / SCREEN_PIXEL_SIZE.x)/ratio;
+	float shader_time = TIME - os_time;
+	float alpha = step(-shader_time / cicles + shader_time * ratio / duration, length(vec2((UV.x - 0.5) * ratio, (UV.y - 0.5))));
+	COLOR = vec4(COLOR.rgb, alpha);
+}"
+
+[resource]
+shader = SubResource( 1 )
+shader_param/os_time = 0.0
+shader_param/duration = 1.0
