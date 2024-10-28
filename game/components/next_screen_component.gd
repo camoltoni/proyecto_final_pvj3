@@ -9,4 +9,5 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_click"):
 		emit = true
 	if emit:
+		set_process_input(false)
 		emit_signal("change_scene")
