@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://fsm/StateFactory.gd" type="Script" id=1]
+[ext_resource path="res://fsm/StateIdle.gd" type="Script" id=2]
+[ext_resource path="res://fsm/StateWalk.gd" type="Script" id=3]
+[ext_resource path="res://fsm/StatePut.gd" type="Script" id=4]
+
+[node name="StateFactory" type="Node"]
+script = ExtResource( 1 )
+
+[node name="Idle" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="Walk" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="Put" type="Node" parent="."]
+script = ExtResource( 4 )

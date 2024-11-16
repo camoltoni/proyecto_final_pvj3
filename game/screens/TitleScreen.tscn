@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://screens/title_screen.gd" type="Script" id=1]
-[ext_resource path="res://components/next_screen_component.gd" type="Script" id=2]
+[ext_resource path="res://components/next_screen_component.tscn" type="PackedScene" id=2]
 [ext_resource path="res://screens/transition/Transition.tscn" type="PackedScene" id=3]
 [ext_resource path="res://screens/transition/shrink_shadermaterial.tres" type="Material" id=5]
 
@@ -19,8 +19,7 @@ de MAX"
 align = 1
 valign = 1
 
-[node name="NextScreenComponent" type="Node" parent="."]
-script = ExtResource( 2 )
+[node name="NextScreenComponent" parent="." instance=ExtResource( 2 )]
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
