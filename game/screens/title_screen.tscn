@@ -2,7 +2,7 @@
 
 [ext_resource path="res://screens/title_screen.gd" type="Script" id=1]
 [ext_resource path="res://components/next_screen_component.tscn" type="PackedScene" id=2]
-[ext_resource path="res://screens/transition/Transition.tscn" type="PackedScene" id=3]
+[ext_resource path="res://screens/transition/transition.tscn" type="PackedScene" id=3]
 [ext_resource path="res://screens/transition/shrink_shadermaterial.tres" type="Material" id=5]
 
 [node name="TitleScreen" type="Control"]
@@ -28,7 +28,7 @@ autostart = true
 
 [node name="StartTransition" parent="." instance=ExtResource( 3 )]
 
-[node name="EndTransition" parent="." instance_placeholder="res://screens/transition/Transition.tscn"]
+[node name="EndTransition" parent="." instance_placeholder="res://screens/transition/transition.tscn"]
 shader_material = ExtResource( 5 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

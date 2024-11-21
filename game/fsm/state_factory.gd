@@ -17,3 +17,8 @@ func change_state(new_state: String):
 		state.exit()
 		state = states_dic[new_state]
 		state.enter()
+
+
+
+
+

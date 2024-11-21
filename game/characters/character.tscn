@@ -2,7 +2,7 @@
 
 [ext_resource path="res://sprites/characters/max_red.png" type="Texture" id=1]
 [ext_resource path="res://components/mover_component.gd" type="Script" id=2]
-[ext_resource path="res://fsm/StateFactory.tscn" type="PackedScene" id=3]
+[ext_resource path="res://fsm/state_factory.tscn" type="PackedScene" id=3]
 [ext_resource path="res://characters/character.gd" type="Script" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
@@ -40,10 +40,11 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 9 )
+position = Vector2( 0, -23 )
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -32 )
 frames = SubResource( 6 )
 frame = 3
 

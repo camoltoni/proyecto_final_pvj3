@@ -12,11 +12,11 @@ func _ready() -> void:
 func _on_change_scene():
 	if is_instance_valid(end_transition):
 		var end_transition_instance = (end_transition as InstancePlaceholder).create_instance(true)
-		end_transition_instance.connect( "transition_ended", self, "_change_scene")
+		end_transition_instance.connect("transition_ended", self, "_change_scene")
 
 
 func _change_scene():
-	assert(get_tree().change_scene("res://screens/GameScreen.tscn") == OK)
+	assert(get_tree().change_scene("res://screens/game_screen.tscn") == OK)
 
 
 func _on_Timer_timeout() -> void:

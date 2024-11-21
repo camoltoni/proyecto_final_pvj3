@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "State",
 "language": "GDScript",
-"path": "res://fsm/State.gd"
+"path": "res://fsm/state.gd"
 } ]
 _global_script_class_icons={
 "Character": "",
@@ -27,7 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Las aventuras de MAX"
-run/main_scene="res://screens/TitleScreen.tscn"
+run/main_scene="res://screens/title_screen.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -36,8 +36,8 @@ Globals="*res://singletons/Globals.gd"
 
 [display]
 
-window/size/width=288
-window/size/height=180
+window/size/width=1152
+window/size/height=720
 window/size/test_width=1152
 window/size/test_height=720
 window/stretch/mode="2d"
