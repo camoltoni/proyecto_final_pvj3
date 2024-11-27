@@ -3,6 +3,7 @@ extends TileMap
 const BASE_LINE_WIDTH = 3.0
 const DRAW_COLOR = Color.red
 
+
 # The Tilemap node doesn't have clear bounds so we're defining the map's limits here.
 export(Vector2) var map_size = get_used_rect().size
 
@@ -30,7 +31,6 @@ func _draw():
 	if not _point_path:
 		return
 	var point_start = _point_path[0]
-	var point_end = _point_path[len(_point_path) - 1]
 
 	# set_cell(point_start.x, point_start.y, path_start_tile)
 	# set_cell(point_end.x, point_end.y, path_end_tile)
@@ -131,13 +131,20 @@ func is_outside_map_bounds(point):
 func get_astar_path(world_start, world_end):
 	self.path_start_position = world_to_map(world_start)
 	self.path_end_position = world_to_map(world_end)
+	print_debug("start: ", path_start_position, "end: ", path_end_position)
 	_recalculate_path()
 	var path_world = []
 	for point in _point_path:
 		var point_world = map_to_world(Vector2(point.x, point.y)) + _half_cell_size
 		path_world.append(point_world)
+	print_debug("path: ", path_world)
 	return path_world
 
+func get_valid_direction(world_start, new_direction):
+	var point_world = world_start + new_direction * cell_size
+	var point_index = calculate_point_index(world_to_map(point_world))
+	if astar_node.has_point(point_index):
+		return point_world
 
 func _recalculate_path():
 	clear_previous_path_drawing()
@@ -180,7 +187,8 @@ func _set_path_end_position(value):
 func _get_obstacles_cells() -> Array:
 	var obs_cells: = get_used_cells() #### TRAIGO TODAS LAS CELDAS OCUPADAS
 	for layer in get_children():
-		for cell in layer.get_used_cells():
-			if not (cell in obs_cells):
-				obs_cells.push_back(cell)
+		if layer is TileMap:
+			for cell in layer.get_used_cells():
+				if not (cell in obs_cells):
+					obs_cells.push_back(cell)
 	return obs_cells
