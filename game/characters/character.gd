@@ -1,20 +1,13 @@
+extends Area2D
 class_name Character
 
-extends Area2D
-
-onready var state_factory: StateFactory = $StateFactory
-onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var level:TileMap = get_parent() as TileMap
+
 var path:Array
 var new_direction: Vector2
 var _velocity: Vector2 = Vector2()
+
 export var speed: float = 200.0
-
-
-func _process(delta: float) -> void:
-	state_factory.state.process(delta)
-	if animation_player.has_animation(state_factory.state.name):
-		animation_player.play(state_factory.state.name)
 
 func move_to(world_position: Vector2) -> bool:
 	if _velocity.length_squared() > 0.0:
@@ -38,4 +31,3 @@ func set_direction(input_direction: Vector2):
 	if valid_direction:
 		new_direction = valid_direction
 		return true
-		

@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
+[ext_resource path="res://characters/player/draw_path.gd" type="Script" id=1]
 [ext_resource path="res://sprites/paths/path_end.png" type="Texture" id=2]
 [ext_resource path="res://sprites/paths/path_start.png" type="Texture" id=3]
 [ext_resource path="res://levels/tilesets/Room_Builder_free_32x32.png" type="Texture" id=4]
@@ -123,3 +124,7 @@ __meta__ = {
 
 [node name="Decoration" type="TileMap" parent="Tilemaps"]
 format = 1
+
+[node name="DrawPath" type="Node2D" parent="."]
+z_index = 1
+script = ExtResource( 1 )

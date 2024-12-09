@@ -9,15 +9,13 @@ func enter():
 func process(_delta):
 	var arrived_to_next_point = owner.move_to(_target_point_world)
 	if arrived_to_next_point:
-		if owner.path.size():
+		if character.path.size():
 			_target_point_world = owner.path.pop_front()
 		else:
-			owner.state_factory.change_state("Idle")
+			character.state_factory.change_state("Idle")
 
 func input(params: Dictionary):
-	if params.has("level_click"):
-		if owner.set_path(params["level_click"]):
-			owner.state_factory.change_state("Follow")
+	check_input_rules(params)
 
 func exit():
 	pass

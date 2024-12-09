@@ -1,8 +1,5 @@
 extends TileMap
 
-const BASE_LINE_WIDTH = 3.0
-const DRAW_COLOR = Color.red
-
 
 # The Tilemap node doesn't have clear bounds so we're defining the map's limits here.
 export(Vector2) var map_size = get_used_rect().size
@@ -27,21 +24,21 @@ func _ready():
 	var walkable_cells_list = astar_add_walkable_cells(obstacles)
 	astar_connect_walkable_cells(walkable_cells_list)
 
-func _draw():
-	if not _point_path:
-		return
-	var point_start = _point_path[0]
-
-	# set_cell(point_start.x, point_start.y, path_start_tile)
-	# set_cell(point_end.x, point_end.y, path_end_tile)
-
-	var last_point = map_to_world(Vector2(point_start.x, point_start.y)) + _half_cell_size
-	draw_circle(last_point, BASE_LINE_WIDTH * 2.0, DRAW_COLOR)
-	for index in range(1, len(_point_path)):
-		var current_point = map_to_world(Vector2(_point_path[index].x, _point_path[index].y)) + _half_cell_size
-		draw_line(last_point, current_point, DRAW_COLOR, BASE_LINE_WIDTH, true)
-		draw_circle(current_point, BASE_LINE_WIDTH * 2.0, DRAW_COLOR)
-		last_point = current_point
+#func _draw():
+#	if not _point_path:
+#		return
+#	var point_start = _point_path[0]
+#
+#	# set_cell(point_start.x, point_start.y, path_start_tile)
+#	# set_cell(point_end.x, point_end.y, path_end_tile)
+#
+#	var last_point = map_to_world(Vector2(point_start.x, point_start.y)) + _half_cell_size
+#	draw_circle(last_point, BASE_LINE_WIDTH * 2.0, DRAW_COLOR)
+#	for index in range(1, len(_point_path)):
+#		var current_point = map_to_world(Vector2(_point_path[index].x, _point_path[index].y)) + _half_cell_size
+#		draw_line(last_point, current_point, DRAW_COLOR, BASE_LINE_WIDTH, true)
+#		draw_circle(current_point, BASE_LINE_WIDTH * 2.0, DRAW_COLOR)
+#		last_point = current_point
 
 
 # Loops through all cells within the map's bounds and
@@ -129,15 +126,15 @@ func is_outside_map_bounds(point):
 
 
 func get_astar_path(world_start, world_end):
-	self.path_start_position = world_to_map(world_start)
-	self.path_end_position = world_to_map(world_end)
-	print_debug("start: ", path_start_position, "end: ", path_end_position)
+	path_start_position = world_to_map(world_start)
+	path_end_position = world_to_map(world_end)
+	if path_start_position == path_end_position:
+		return []
 	_recalculate_path()
 	var path_world = []
 	for point in _point_path:
 		var point_world = map_to_world(Vector2(point.x, point.y)) + _half_cell_size
 		path_world.append(point_world)
-	print_debug("path: ", path_world)
 	return path_world
 
 func get_valid_direction(world_start, new_direction):
@@ -152,6 +149,10 @@ func _recalculate_path():
 	var end_point_index = calculate_point_index(path_end_position)
 	# This method gives us an array of points. Note you need the start and
 	# end points' indices as input.
+	var points = astar_node.get_points()
+	if not (start_point_index in points) or not (end_point_index in points):
+		_point_path = []
+		return
 	_point_path = astar_node.get_point_path(start_point_index, end_point_index)
 	# Redraw the lines and circles from the start to the end point.
 	update()
