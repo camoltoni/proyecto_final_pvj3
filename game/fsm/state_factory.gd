@@ -22,7 +22,13 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	state.process(delta)
+<<<<<<< HEAD
 
+=======
+	var player = state.character.animation_player
+	if player.has_animation(name):
+		player.play(name)
+>>>>>>> parent of ee15204 (Agregadas animaciones idle-walk-put)
 
 func change_state(new_state: String):
 	if state:
