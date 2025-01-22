@@ -10,7 +10,3 @@ func process(_delta:float):
 
 func exit():
 	pass
-
-
-func input(params: Dictionary):
-	check_input_rules(params)

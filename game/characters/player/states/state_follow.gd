@@ -1,5 +1,10 @@
 extends State
 
+onready var state_factory: StateFactory = get_parent()
+onready var rule_follow: Node = $RuleFollow
+onready var rule_goto: Node = $RuleGoto
+
+
 var _target_point_world: = Vector2()
 
 func enter():
@@ -12,10 +17,13 @@ func process(_delta):
 		if character.path.size():
 			_target_point_world = owner.path.pop_front()
 		else:
-			character.state_factory.change_state("Idle")
+			get_parent().change_state("Idle")
 
-func input(params: Dictionary):
-	check_input_rules(params)
+func input(_params: Dictionary):
+	if rule_follow.check(_params, owner):
+		get_parent().change_state("Follow")
+	if rule_goto.check(_params, owner):
+		get_parent().change_state("GoTo")
 
 func exit():
 	pass
