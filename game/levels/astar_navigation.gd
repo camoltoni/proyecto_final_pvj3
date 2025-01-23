@@ -138,10 +138,10 @@ func get_astar_path(world_start, world_end):
 	return path_world
 
 func get_valid_direction(world_start, new_direction):
-	var point_world = world_start + new_direction * cell_size
-	var point_index = calculate_point_index(world_to_map(point_world))
+	var point_world = world_to_map(world_start + new_direction * cell_size)
+	var point_index = calculate_point_index(point_world)
 	if astar_node.has_point(point_index):
-		return point_world
+		return point_world * cell_size + _half_cell_size
 
 func _recalculate_path():
 	clear_previous_path_drawing()

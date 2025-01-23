@@ -5,13 +5,10 @@ onready var level:TileMap = get_parent() as TileMap
 
 var path:Array
 var new_direction: Vector2
-var _velocity: Vector2 = Vector2()
 
 export var speed: float = 200.0
 
 func move_to(world_position: Vector2) -> bool:
-	if _velocity.length_squared() > 0.0:
-		rotation = _velocity.angle()
 	global_position = global_position.move_toward(world_position, get_process_delta_time() * speed)
 	if global_position.distance_to(world_position) == 0.0:
 		global_position = world_position
@@ -31,3 +28,6 @@ func set_direction(input_direction: Vector2):
 	if valid_direction:
 		new_direction = valid_direction
 		return true
+
+func get_anim_state_machine():
+	return $AnimationTree["parameters/playback"]

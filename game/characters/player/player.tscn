@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://characters/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/player/states/state_follow.gd" type="Script" id=2]
@@ -10,7 +10,7 @@
 [ext_resource path="res://characters/player/states/state_goto.gd" type="Script" id=8]
 [ext_resource path="res://characters/player/rules/rule_goto.gd" type="Script" id=9]
 [ext_resource path="res://characters/player/states/state_put.gd" type="Script" id=10]
-[ext_resource path="res://characters/player/rules/rule_animation_finished.gd" type="Script" id=11]
+[ext_resource path="res://characters/player/rules/pepe_rule_animation_finished.gd" type="Script" id=11]
 
 [sub_resource type="Animation" id=17]
 resource_name = "HurtDown"
@@ -298,6 +298,66 @@ tracks/0/keys = {
 "values": [ 30, 31, 32, 33, 34, 35 ]
 }
 
+[sub_resource type="AnimationNodeAnimation" id=19]
+animation = "IdleDown"
+
+[sub_resource type="AnimationNodeAnimation" id=20]
+animation = "IdleUp"
+
+[sub_resource type="AnimationNodeAnimation" id=21]
+animation = "IdleLeft"
+
+[sub_resource type="AnimationNodeAnimation" id=22]
+animation = "IdleRight"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=23]
+blend_point_0/node = SubResource( 19 )
+blend_point_0/pos = Vector2( 0, 1 )
+blend_point_1/node = SubResource( 20 )
+blend_point_1/pos = Vector2( 0, -1 )
+blend_point_2/node = SubResource( 21 )
+blend_point_2/pos = Vector2( -1, 0 )
+blend_point_3/node = SubResource( 22 )
+blend_point_3/pos = Vector2( 1, 0 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id=26]
+animation = "WalkDown"
+
+[sub_resource type="AnimationNodeAnimation" id=27]
+animation = "WalkLeft"
+
+[sub_resource type="AnimationNodeAnimation" id=28]
+animation = "WalkRight"
+
+[sub_resource type="AnimationNodeAnimation" id=29]
+animation = "WalkUp"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=30]
+blend_point_0/node = SubResource( 26 )
+blend_point_0/pos = Vector2( 0, 1 )
+blend_point_1/node = SubResource( 27 )
+blend_point_1/pos = Vector2( -1, 0 )
+blend_point_2/node = SubResource( 28 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 29 )
+blend_point_3/pos = Vector2( 0, -1 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+
+[sub_resource type="AnimationNodeStateMachine" id=24]
+states/Idle/node = SubResource( 23 )
+states/Idle/position = Vector2( 314, 108 )
+states/Walk/node = SubResource( 30 )
+states/Walk/position = Vector2( 505, 108 )
+transitions = [ "Idle", "Walk", SubResource( 31 ), "Walk", "Idle", SubResource( 32 ) ]
+start_node = "Idle"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=25]
+
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 6 )
 
@@ -326,7 +386,13 @@ anims/WalkLeft = SubResource( 8 )
 anims/WalkRight = SubResource( 6 )
 anims/WalkUp = SubResource( 9 )
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="4"]
+[node name="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 24 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 25 )
+parameters/Idle/blend_position = Vector2( 0, 1 )
+parameters/Walk/blend_position = Vector2( 0, 0 )
 
 [node name="StateFactory" parent="." index="5" instance=ExtResource( 3 )]
 
@@ -353,9 +419,6 @@ script = ExtResource( 8 )
 
 [node name="RuleFollow" type="Node" parent="StateFactory/GoTo" index="0"]
 script = ExtResource( 5 )
-
-[node name="RuleGoto" type="Node" parent="StateFactory/GoTo" index="1"]
-script = ExtResource( 9 )
 
 [node name="Put" type="Node" parent="StateFactory" index="3"]
 script = ExtResource( 10 )

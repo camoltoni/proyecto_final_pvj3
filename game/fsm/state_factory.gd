@@ -16,9 +16,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	state.process(delta)
-	var animation_player = state.character.animation_player
-	if animation_player.has_animation(name):
-		animation_player.play(name)
+
 
 func change_state(new_state: String):
 	if state:

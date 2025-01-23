@@ -1,10 +1,8 @@
 extends State
 
-onready var rule_follow: Node = $RuleFollow
-onready var rule_goto: Node = $RuleGoto
-
 
 func enter():
+	(character.get_node("AnimationTree")["parameters/playback"] as AnimationNodeStateMachinePlayback).travel("Idle")
 	pass
 
 
