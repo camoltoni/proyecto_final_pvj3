@@ -34,3 +34,5 @@ func set_direction(input_direction: Vector2):
 		emit_signal("velocity_changed", new_direction)
 		return true
 
+func get_anim_state_machine():
+	return $AnimationTree["parameters/playback"]

@@ -1,15 +1,8 @@
 extends State
 
-onready var state_factory: StateFactory = get_parent()
-onready var rule_follow: Rule = $RuleFollow
-onready var rule_goto: Rule = $RuleGoto
-onready var input_levelclick: Node2D = $InputLevelclickComponent
-
-func _ready() -> void:
-	assert(input_levelclick.connect("level_click", self, "_on_level_click") == OK, 
-		Globals.MSG_SIGNAL_NOT_CONNECTED)
 
 func enter():
+	(character.get_node("AnimationTree")["parameters/playback"] as AnimationNodeStateMachinePlayback).travel("Idle")
 	pass
 
 
