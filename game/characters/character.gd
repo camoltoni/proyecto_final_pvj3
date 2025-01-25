@@ -31,3 +31,8 @@ func set_direction(input_direction: Vector2):
 
 func get_anim_state_machine():
 	return $AnimationTree["parameters/playback"]
+
+func set_animation_direction(point: Vector2):
+	var blend_position: = (point - global_position).normalized()
+	$AnimationTree["parameters/Walk/blend_position"] = blend_position
+	$AnimationTree["parameters/Idle/blend_position"] = blend_position
