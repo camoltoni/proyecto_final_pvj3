@@ -4,6 +4,9 @@ var _target_point_world: = Vector2()
 
 func enter():
 	if character.path.size():
+		var _path: = character.path.duplicate()
+		_path.push_front(character.global_position)
+		character.drawer.set_path(_path)
 		_target_point_world = character.path.pop_front()
 		character.get_anim_state_machine().travel("Walk")
 		character.set_animation_direction(_target_point_world)
@@ -20,11 +23,12 @@ func process(_delta):
 
 
 func input(params: Dictionary):
-	check_input_rules(params)
+	check_rules(params)
 
 
 func exit():
-	pass
+	if character.path.size():
+		assert(character.path.empty())
 
 
 func set_animation_direction():

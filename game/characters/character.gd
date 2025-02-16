@@ -36,3 +36,4 @@ func set_animation_direction(point: Vector2):
 	var blend_position: = (point - global_position).normalized()
 	$AnimationTree["parameters/Walk/blend_position"] = blend_position
 	$AnimationTree["parameters/Idle/blend_position"] = blend_position
+	$AnimationTree["parameters/Put/blend_position"] = blend_position

@@ -1,4 +1,4 @@
-[gd_scene load_steps=145 format=2]
+[gd_scene load_steps=152 format=2]
 
 [ext_resource path="res://characters/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/player/states/state_follow.gd" type="Script" id=2]
@@ -10,7 +10,7 @@
 [ext_resource path="res://characters/player/states/state_goto.gd" type="Script" id=8]
 [ext_resource path="res://characters/player/rules/rule_goto.gd" type="Script" id=9]
 [ext_resource path="res://characters/player/states/state_put.gd" type="Script" id=10]
-[ext_resource path="res://characters/player/rules/pepe_rule_animation_finished.gd" type="Script" id=11]
+[ext_resource path="res://characters/player/rules/rule_put.gd" type="Script" id=11]
 [ext_resource path="res://sprites/characters/max_red.png" type="Texture" id=12]
 
 [sub_resource type="AtlasTexture" id=45]
@@ -556,6 +556,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=13]
 resource_name = "PutDown"
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:frame")
 tracks/0/interp = 1
@@ -571,6 +572,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=12]
 resource_name = "PutLeft"
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:frame")
 tracks/0/interp = 1
@@ -586,6 +588,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=10]
 resource_name = "PutRight"
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:frame")
 tracks/0/interp = 1
@@ -601,6 +604,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=11]
 resource_name = "PutUp"
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:frame")
 tracks/0/interp = 1
@@ -720,6 +724,29 @@ blend_point_3/node = SubResource( 22 )
 blend_point_3/pos = Vector2( 1, 0 )
 blend_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id=146]
+animation = "PutDown"
+
+[sub_resource type="AnimationNodeAnimation" id=147]
+animation = "PutUp"
+
+[sub_resource type="AnimationNodeAnimation" id=148]
+animation = "PutRight"
+
+[sub_resource type="AnimationNodeAnimation" id=149]
+animation = "PutLeft"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=145]
+blend_point_0/node = SubResource( 146 )
+blend_point_0/pos = Vector2( 0, 1 )
+blend_point_1/node = SubResource( 147 )
+blend_point_1/pos = Vector2( 0, -1 )
+blend_point_2/node = SubResource( 148 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 149 )
+blend_point_3/pos = Vector2( -1, 0 )
+blend_mode = 1
+
 [sub_resource type="AnimationNodeAnimation" id=26]
 animation = "WalkDown"
 
@@ -747,12 +774,18 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=32]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=150]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=151]
+
 [sub_resource type="AnimationNodeStateMachine" id=24]
 states/Idle/node = SubResource( 23 )
 states/Idle/position = Vector2( 314, 108 )
+states/Put/node = SubResource( 145 )
+states/Put/position = Vector2( 313, 175 )
 states/Walk/node = SubResource( 30 )
 states/Walk/position = Vector2( 505, 108 )
-transitions = [ "Idle", "Walk", SubResource( 31 ), "Walk", "Idle", SubResource( 32 ) ]
+transitions = [ "Idle", "Walk", SubResource( 31 ), "Walk", "Idle", SubResource( 32 ), "Put", "Idle", SubResource( 150 ), "Idle", "Put", SubResource( 151 ) ]
 start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=25]
@@ -763,6 +796,7 @@ script = ExtResource( 6 )
 [node name="InputComponent" parent="." index="0" instance=ExtResource( 7 )]
 
 [node name="AnimatedSprite" parent="." index="2"]
+z_index = 20
 frames = SubResource( 40 )
 frame = 0
 
@@ -791,6 +825,7 @@ anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 25 )
 parameters/Idle/blend_position = Vector2( 0, 1 )
+parameters/Put/blend_position = Vector2( 0, 0.991379 )
 parameters/Walk/blend_position = Vector2( -0.00325203, 0.991379 )
 
 [node name="StateFactory" parent="." index="5" instance=ExtResource( 3 )]
@@ -804,6 +839,9 @@ script = ExtResource( 5 )
 [node name="RuleGoto" type="Node" parent="StateFactory/Idle" index="1"]
 script = ExtResource( 9 )
 
+[node name="RulePut" type="Node" parent="StateFactory/Idle" index="2"]
+script = ExtResource( 11 )
+
 [node name="Follow" type="Node" parent="StateFactory" index="1"]
 script = ExtResource( 2 )
 
@@ -812,6 +850,9 @@ script = ExtResource( 5 )
 
 [node name="RuleGoto" type="Node" parent="StateFactory/Follow" index="1"]
 script = ExtResource( 9 )
+
+[node name="RulePut" type="Node" parent="StateFactory/Follow" index="2"]
+script = ExtResource( 11 )
 
 [node name="GoTo" type="Node" parent="StateFactory" index="2"]
 script = ExtResource( 8 )
@@ -822,5 +863,8 @@ script = ExtResource( 5 )
 [node name="Put" type="Node" parent="StateFactory" index="3"]
 script = ExtResource( 10 )
 
-[node name="RuleAnimationFinished" type="Node" parent="StateFactory/Put" index="0"]
-script = ExtResource( 11 )
+[node name="RuleFollow" type="Node" parent="StateFactory/Put" index="0"]
+script = ExtResource( 5 )
+
+[node name="RuleGoto" type="Node" parent="StateFactory/Put" index="1"]
+script = ExtResource( 9 )

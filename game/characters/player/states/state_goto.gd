@@ -7,6 +7,7 @@ func enter():
 		_target_point_world = character.new_direction
 		character.get_anim_state_machine().travel("Walk")
 		character.set_animation_direction(_target_point_world)
+		character.drawer.set_path([character.global_position, _target_point_world])
 
 func process(_delta):
 	var arrived_to_next_point = character.move_to(_target_point_world)
@@ -14,7 +15,7 @@ func process(_delta):
 		character.state_factory.change_state("Idle")
 
 func input(params: Dictionary):
-	check_input_rules(params)
+	check_rules(params)
 
 func exit():
 	_target_point_world = Vector2.ZERO

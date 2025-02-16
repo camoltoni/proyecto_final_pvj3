@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://levels/put_zone.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=38]
+extents = Vector2( 32, 32 )
+
+[node name="PZ1" type="Area2D" groups=["put"]]
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 38 )

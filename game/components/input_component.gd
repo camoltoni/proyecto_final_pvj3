@@ -2,6 +2,7 @@ extends Node2D
 
 signal direction_changed(direction)
 signal level_click(point)
+signal put_object
 
 
 func _process(_delta: float) -> void:
@@ -15,3 +16,5 @@ func _process(_delta: float) -> void:
 		if direction.x and direction.y:
 			return
 		emit_signal("direction_changed", direction)
+	if Input.is_action_just_pressed("put"):
+		emit_signal("put_object")
