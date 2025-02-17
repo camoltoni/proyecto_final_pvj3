@@ -1,1 +1,1 @@
-extends Character
+extends Node2D
