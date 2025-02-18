@@ -778,7 +778,7 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=151]
 
-[sub_resource type="AnimationNodeStateMachine" id=24]
+[sub_resource type="AnimationNodeStateMachine" id=152]
 states/Idle/node = SubResource( 23 )
 states/Idle/position = Vector2( 314, 108 )
 states/Put/node = SubResource( 145 )
@@ -820,7 +820,7 @@ anims/WalkRight = SubResource( 6 )
 anims/WalkUp = SubResource( 9 )
 
 [node name="AnimationTree" parent="." index="4"]
-tree_root = SubResource( 24 )
+tree_root = SubResource( 152 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 25 )
