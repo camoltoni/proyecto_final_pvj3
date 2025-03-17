@@ -1,8 +1,10 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://characters/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/guard/guard.gd" type="Script" id=2]
 [ext_resource path="res://characters/guard/guard3_sprite_frames.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://fsm/state_factory.gd" type="Script" id=4]
+[ext_resource path="res://characters/guard/states/idle_state.gd" type="Script" id=5]
 
 [sub_resource type="Animation" id=83]
 resource_name = "HitDown"
@@ -314,6 +316,9 @@ start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=109]
 
+[sub_resource type="CircleShape2D" id=110]
+radius = 192.0
+
 [node name="Guard" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
@@ -345,3 +350,26 @@ parameters/playback = SubResource( 109 )
 parameters/Hit/blend_position = Vector2( 0, 1 )
 parameters/Idle/blend_position = Vector2( 0, 1 )
 parameters/Walk/blend_position = Vector2( 0, 1 )
+
+[node name="Listen" type="Area2D" parent="." index="4"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Listen" index="0"]
+shape = SubResource( 110 )
+
+[node name="StateFactory" type="Node" parent="." index="5"]
+script = ExtResource( 4 )
+
+[node name="Idle" type="Node" parent="StateFactory" index="0"]
+script = ExtResource( 5 )
+
+[node name="RuleBoredorm" type="Node" parent="StateFactory/Idle" index="0"]
+
+[node name="RuleVigilance" type="Node" parent="StateFactory/Idle" index="1"]
+
+[node name="Walk" type="Node" parent="StateFactory" index="1"]
+
+[node name="Check" type="Node" parent="StateFactory" index="2"]
+
+[node name="Patrol" type="Node" parent="StateFactory" index="3"]
+
+[node name="Chase" type="Node" parent="StateFactory" index="4"]

@@ -15,7 +15,7 @@ func _exit_tree() -> void:
 	owner.call_deferred("add_child", item)
 	item.global_position = global_position
 	var tween: = get_tree().current_scene.create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN)
-	tween.tween_property(item, "modulate:a", 1.0, 0.5).from(0.0)
+	assert(tween.tween_property(item, "modulate:a", 1.0, 0.5).from(0.0) != null)
 
 func _create_item():
 	pass

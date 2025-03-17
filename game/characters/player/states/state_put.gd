@@ -5,7 +5,7 @@ signal put_ended
 var put_time: float
 
 func enter():
-	connect("put_ended", character, "on_put_ended")
+	assert(connect("put_ended", character, "on_put_ended") == OK, Globals.MSG_SIGNAL_NOT_CONNECTED)
 	character.get_anim_state_machine().travel("Put")
 
 

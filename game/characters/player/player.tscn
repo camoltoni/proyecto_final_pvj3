@@ -11,7 +11,7 @@
 [ext_resource path="res://characters/player/rules/rule_goto.gd" type="Script" id=9]
 [ext_resource path="res://characters/player/states/state_put.gd" type="Script" id=10]
 [ext_resource path="res://characters/player/rules/rule_put.gd" type="Script" id=11]
-[ext_resource path="res://sprites/characters/max_red.png" type="Texture" id=12]
+[ext_resource path="res://assets/sprites/characters/max_red.png" type="Texture" id=12]
 
 [sub_resource type="AtlasTexture" id=45]
 atlas = ExtResource( 12 )

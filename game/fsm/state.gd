@@ -21,7 +21,7 @@ func exit():
 
 
 func input(_params: Dictionary):
-	assert(!is_instance_valid(self), Globals.MSG_INSTANCE_IMPLEMENT_METHOD)
+	pass
 
 func check_rules(params: Dictionary):
 	for r in rules:

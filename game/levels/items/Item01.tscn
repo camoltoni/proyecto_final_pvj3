@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://levels/items/Halloween_Singles_Shadowless_32x32_55.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/items/Halloween_Singles_Shadowless_32x32_55.png" type="Texture" id=1]
 
 [node name="Item01" type="Sprite"]
 z_index = 10
