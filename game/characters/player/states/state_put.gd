@@ -21,6 +21,3 @@ func exit():
 	disconnect("put_ended", character, "on_put_ended")
 	pass
 
-
-func input(params: Dictionary):
-	check_rules(params)

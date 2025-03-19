@@ -14,8 +14,6 @@ func process(_delta):
 	if arrived_to_next_point:
 		character.state_factory.change_state("Idle")
 
-func input(params: Dictionary):
-	check_rules(params)
 
 func exit():
 	_target_point_world = Vector2.ZERO

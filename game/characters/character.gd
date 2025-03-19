@@ -37,3 +37,13 @@ func set_animation_direction(point: Vector2):
 	$AnimationTree["parameters/Walk/blend_position"] = blend_position
 	$AnimationTree["parameters/Idle/blend_position"] = blend_position
 	$AnimationTree["parameters/Put/blend_position"] = blend_position
+
+#func _set_path(global_mouse_position: Vector2):
+#	if .set_path(global_mouse_position):
+#		var complete_path:Array = []
+#		complete_path.append_array(path)
+#		complete_path.push_front(position)
+#		#owner.get_node("DrawPath").set_path(complete_path)
+#		#drawer.set_path(complete_path)
+#		return true
+#	return false

@@ -22,13 +22,9 @@ func process(_delta):
 			character.state_factory.change_state("Idle")
 
 
-func input(params: Dictionary):
-	check_rules(params)
-
-
 func exit():
 	if character.path.size():
-		assert(character.path.empty())
+		character.path.clear()
 
 
 func set_animation_direction():

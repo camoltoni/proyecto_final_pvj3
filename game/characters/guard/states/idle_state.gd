@@ -1,6 +1,6 @@
 extends State
 
-signal bored
+
 export var boredorm_time: float = 3.0
 
 func enter():
@@ -10,7 +10,8 @@ func enter():
 func process(delta):
 	character.boredorm += delta / boredorm_time
 	if (character as Guard).boredorm >= 1.0:
-		emit_signal("bored")
+		self.check_rules({"bored": [character.global_position]})
+		character.boredorm = 0.0
 
 
 func exit():

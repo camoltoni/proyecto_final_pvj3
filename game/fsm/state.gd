@@ -20,9 +20,6 @@ func exit():
 	assert(!is_instance_valid(self), Globals.MSG_INSTANCE_IMPLEMENT_METHOD)
 
 
-func input(_params: Dictionary):
-	pass
-
 func check_rules(params: Dictionary):
 	for r in rules:
 		r.check(params, character)
