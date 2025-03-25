@@ -2,6 +2,7 @@ extends Area2D
 class_name Character
 
 onready var level:TileMap = get_parent() as TileMap
+onready var drawer: = owner.get_node("DrawPath")
 
 var path:Array
 var new_direction: Vector2
@@ -36,7 +37,7 @@ func set_animation_direction(point: Vector2):
 	var blend_position: = (point - global_position).normalized()
 	$AnimationTree["parameters/Walk/blend_position"] = blend_position
 	$AnimationTree["parameters/Idle/blend_position"] = blend_position
-	$AnimationTree["parameters/Put/blend_position"] = blend_position
+	#$AnimationTree["parameters/Put/blend_position"] = blend_position
 
 #func _set_path(global_mouse_position: Vector2):
 #	if .set_path(global_mouse_position):

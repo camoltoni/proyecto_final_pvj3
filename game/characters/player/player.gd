@@ -5,7 +5,7 @@ class_name Player
 onready var input_component = $InputComponent
 onready var state_factory: StateFactory = $StateFactory
 # SOLO PARA DEBUG
-onready var drawer: = owner.get_node("DrawPath")
+# onready var drawer: = owner.get_node("DrawPath")
 
 func _ready() -> void:
 	assert(input_component.connect("level_click", self, "_on_level_click") == OK, 
@@ -28,7 +28,10 @@ func _on_put_object():
 	#state_factory.state.input({"put":get_overlapping_areas()})
 	state_factory.state.check_rules({"put":get_overlapping_areas()})
 
-
+func set_animation_direction(point: Vector2):
+	var blend_position: = (point - global_position).normalized()
+	$AnimationTree["parameters/Put/blend_position"] = blend_position
+	.set_animation_direction(point)
 
 #func _set_path(global_mouse_position: Vector2):
 #	if .set_path(global_mouse_position):

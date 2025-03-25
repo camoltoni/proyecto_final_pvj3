@@ -111,6 +111,11 @@ func astar_connect_walkable_cells_diagonal(points_array):
 func calculate_point_index(point):
 	return point.x + map_size.x * point.y
 
+func calculate_index_point(index):
+	var v = Vector2()
+	v.y = float(floor(index / map_size.x))
+	v.x = index - map_size.x * v.y
+	return v
 
 func clear_previous_path_drawing():
 	if not _point_path:
@@ -142,6 +147,12 @@ func get_valid_direction(world_start, new_direction):
 	var point_index = calculate_point_index(point_world)
 	if astar_node.has_point(point_index):
 		return point_world * cell_size + _half_cell_size
+
+
+func get_random_walkable_position():
+	var points = astar_node.get_points()
+	var point = points[randi() % points.size()]
+	return calculate_index_point(point) * cell_size + _half_cell_size
 
 func _recalculate_path():
 	clear_previous_path_drawing()
