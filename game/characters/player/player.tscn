@@ -791,6 +791,8 @@ start_node = "Idle"
 [sub_resource type="AnimationNodeStateMachinePlayback" id=25]
 
 [node name="Player" instance=ExtResource( 1 )]
+collision_layer = 4
+collision_mask = 1
 script = ExtResource( 6 )
 
 [node name="InputComponent" parent="." index="0" instance=ExtResource( 7 )]
@@ -819,16 +821,7 @@ anims/WalkLeft = SubResource( 8 )
 anims/WalkRight = SubResource( 6 )
 anims/WalkUp = SubResource( 9 )
 
-[node name="AnimationTree" parent="." index="4"]
-tree_root = SubResource( 152 )
-anim_player = NodePath("../AnimationPlayer")
-active = true
-parameters/playback = SubResource( 25 )
-parameters/Idle/blend_position = Vector2( 0, 1 )
-parameters/Put/blend_position = Vector2( 0, 0.991379 )
-parameters/Walk/blend_position = Vector2( -0.00325203, 0.991379 )
-
-[node name="StateFactory" parent="." index="5" instance=ExtResource( 3 )]
+[node name="StateFactory" parent="." index="4" instance=ExtResource( 3 )]
 
 [node name="Idle" type="Node" parent="StateFactory" index="0"]
 script = ExtResource( 4 )
@@ -868,3 +861,12 @@ script = ExtResource( 5 )
 
 [node name="RuleGoto" type="Node" parent="StateFactory/Put" index="1"]
 script = ExtResource( 9 )
+
+[node name="AnimationTree" parent="." index="5"]
+tree_root = SubResource( 152 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 25 )
+parameters/Idle/blend_position = Vector2( 0, 1 )
+parameters/Put/blend_position = Vector2( 0, 0.991379 )
+parameters/Walk/blend_position = Vector2( -0.00325203, 0.991379 )

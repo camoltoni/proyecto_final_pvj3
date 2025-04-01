@@ -230,6 +230,9 @@ tracks/0/keys = {
 "values": [ 30, 31, 32, 33, 34, 35 ]
 }
 
+[sub_resource type="CircleShape2D" id=110]
+radius = 300.0
+
 [sub_resource type="AnimationNodeAnimation" id=87]
 animation = "HitDown"
 
@@ -321,10 +324,9 @@ start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=109]
 
-[sub_resource type="CircleShape2D" id=110]
-radius = 192.0
-
 [node name="Guard" instance=ExtResource( 1 )]
+collision_layer = 8
+collision_mask = 4
 script = ExtResource( 2 )
 boredorm_time = 10.0
 min_tiredness_time = 10.0
@@ -350,19 +352,17 @@ anims/WalkLeft = SubResource( 81 )
 anims/WalkRight = SubResource( 79 )
 anims/WalkUp = SubResource( 80 )
 
-[node name="AnimationTree" parent="." index="3"]
-tree_root = SubResource( 108 )
-anim_player = NodePath("../AnimationPlayer")
-active = true
-parameters/playback = SubResource( 109 )
-parameters/Hit/blend_position = Vector2( 0, 1 )
-parameters/Idle/blend_position = Vector2( 0, 1 )
-parameters/Walk/blend_position = Vector2( 0, 1 )
-
-[node name="Listen" type="Area2D" parent="." index="4"]
+[node name="Listen" type="Area2D" parent="." index="3"]
+collision_layer = 0
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Listen" index="0"]
 shape = SubResource( 110 )
+
+[node name="Sight" type="Area2D" parent="." index="4"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sight" index="0"]
+polygon = PoolVector2Array( 0, 0, -290, 80, -210, 210, -80, 290, 80, 290, 210, 210, 290, 80 )
 
 [node name="StateFactory" type="Node" parent="." index="5"]
 script = ExtResource( 4 )
@@ -394,4 +394,15 @@ script = ExtResource( 9 )
 [node name="TirednessTimer" type="Timer" parent="." index="6"]
 one_shot = true
 
+[node name="AnimationTree" parent="." index="7"]
+tree_root = SubResource( 108 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 109 )
+parameters/Hit/blend_position = Vector2( 0, 1 )
+parameters/Idle/blend_position = Vector2( 0, 1 )
+parameters/Walk/blend_position = Vector2( 0, 1 )
+
+[connection signal="area_entered" from="Sight" to="." method="_on_Sight_area_entered"]
+[connection signal="area_exited" from="Sight" to="." method="_on_Sight_area_exited"]
 [connection signal="timeout" from="TirednessTimer" to="." method="_on_TirednessTimer_timeout"]

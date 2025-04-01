@@ -1,11 +1,14 @@
 extends Area2D
 class_name Character
 
+signal facing_changed
+
 onready var level:TileMap = get_parent() as TileMap
 onready var drawer: = owner.get_node("DrawPath")
 
 var path:Array
 var new_direction: Vector2
+onready var facing: Vector2 = Vector2.DOWN
 
 export var speed: float = 200.0
 
@@ -33,11 +36,13 @@ func set_direction(input_direction: Vector2):
 func get_anim_state_machine():
 	return $AnimationTree["parameters/playback"]
 
+
 func set_animation_direction(point: Vector2):
-	var blend_position: = (point - global_position).normalized()
-	$AnimationTree["parameters/Walk/blend_position"] = blend_position
-	$AnimationTree["parameters/Idle/blend_position"] = blend_position
-	#$AnimationTree["parameters/Put/blend_position"] = blend_position
+	facing = (point - global_position).normalized()
+	emit_signal("facing_changed")
+	$AnimationTree["parameters/Walk/blend_position"] = facing
+	$AnimationTree["parameters/Idle/blend_position"] = facing
+	#$AnimationTree["parameters/Put/blend_position"] = facing
 
 #func _set_path(global_mouse_position: Vector2):
 #	if .set_path(global_mouse_position):

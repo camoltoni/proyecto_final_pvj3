@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/sprites/characters/max_red.png" type="Texture" id=1]
 [ext_resource path="res://characters/character.gd" type="Script" id=4]
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="CapsuleShape2D" id=7]
 radius = 12.0
 height = 22.0
 
@@ -32,14 +32,16 @@ animations = [ {
 } ]
 
 [node name="Character" type="Area2D"]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_horizontal_guides_": [ 32.0 ]
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -23 )
-shape = SubResource( 1 )
+position = Vector2( 0, -22 )
+shape = SubResource( 7 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -32 )
