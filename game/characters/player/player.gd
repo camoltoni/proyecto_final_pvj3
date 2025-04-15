@@ -18,7 +18,7 @@ func _ready() -> void:
 
 func _on_level_click(global_mouse_position: Vector2):
 	#state_factory.state.input({"level_click": global_mouse_position})
-	state_factory.state.check_rules({"level_click": global_mouse_position})
+	state_factory.state.check_rules({"destination": global_mouse_position})
 
 func _on_direction_changed(direction: Vector2):
 	#state_factory.state.input({"direction_changed": direction})

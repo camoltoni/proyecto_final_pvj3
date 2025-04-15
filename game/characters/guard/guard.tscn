@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://characters/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/guard/guard.gd" type="Script" id=2]
@@ -10,6 +10,11 @@
 [ext_resource path="res://characters/player/rules/rule_follow.gd" type="Script" id=8]
 [ext_resource path="res://characters/player/states/state_follow.gd" type="Script" id=9]
 [ext_resource path="res://characters/guard/rules/rule_tired.gd" type="Script" id=10]
+[ext_resource path="res://characters/guard/states/chase_state.gd" type="Script" id=11]
+[ext_resource path="res://characters/guard/rules/rule_seen.gd" type="Script" id=12]
+[ext_resource path="res://characters/player/states/state_goto.gd" type="Script" id=13]
+[ext_resource path="res://characters/player/rules/rule_goto.gd" type="Script" id=14]
+[ext_resource path="res://characters/guard/states/check_state.gd" type="Script" id=15]
 
 [sub_resource type="Animation" id=83]
 resource_name = "HitDown"
@@ -353,6 +358,7 @@ anims/WalkRight = SubResource( 79 )
 anims/WalkUp = SubResource( 80 )
 
 [node name="Listen" type="Area2D" parent="." index="3"]
+position = Vector2( 0, -20 )
 collision_layer = 0
 collision_mask = 4
 
@@ -360,6 +366,7 @@ collision_mask = 4
 shape = SubResource( 110 )
 
 [node name="Sight" type="Area2D" parent="." index="4"]
+position = Vector2( 0, -20 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sight" index="0"]
 polygon = PoolVector2Array( 0, 0, -290, 80, -210, 210, -80, 290, 80, 290, 210, 210, 290, 80 )
@@ -376,20 +383,40 @@ script = ExtResource( 6 )
 [node name="RuleTired" type="Node" parent="StateFactory/Idle" index="1"]
 script = ExtResource( 10 )
 
+[node name="RuleSeen" type="Node" parent="StateFactory/Idle" index="2"]
+script = ExtResource( 12 )
+
 [node name="Walk" type="Node" parent="StateFactory" index="1"]
 script = ExtResource( 7 )
 
 [node name="RuleFollow" type="Node" parent="StateFactory/Walk" index="0"]
 script = ExtResource( 8 )
 
-[node name="Check" type="Node" parent="StateFactory" index="2"]
+[node name="RuleSeen" type="Node" parent="StateFactory/Walk" index="1"]
+script = ExtResource( 12 )
 
-[node name="Patrol" type="Node" parent="StateFactory" index="3"]
+[node name="Chase" type="Node" parent="StateFactory" index="2"]
+script = ExtResource( 11 )
 
-[node name="Chase" type="Node" parent="StateFactory" index="4"]
+[node name="RuleGoto" type="Node" parent="StateFactory/Chase" index="0"]
+script = ExtResource( 14 )
+
+[node name="RuleFollow" type="Node" parent="StateFactory/Chase" index="1"]
+script = ExtResource( 8 )
+
+[node name="Check" type="Node" parent="StateFactory" index="3"]
+script = ExtResource( 15 )
+
+[node name="RuleFollow" type="Node" parent="StateFactory/Check" index="0"]
+script = ExtResource( 8 )
+
+[node name="Patrol" type="Node" parent="StateFactory" index="4"]
 
 [node name="Follow" type="Node" parent="StateFactory" index="5"]
 script = ExtResource( 9 )
+
+[node name="GoTo" type="Node" parent="StateFactory" index="6"]
+script = ExtResource( 13 )
 
 [node name="TirednessTimer" type="Timer" parent="." index="6"]
 one_shot = true

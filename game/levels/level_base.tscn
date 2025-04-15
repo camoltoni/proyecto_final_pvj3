@@ -80,7 +80,12 @@ __meta__ = {
 }
 
 [node name="Player" parent="Tilemaps/Walls" instance=ExtResource( 9 )]
-position = Vector2( 720, 144 )
+position = Vector2( 80, 144 )
+
+[node name="Guard" parent="Tilemaps/Walls" instance=ExtResource( 11 )]
+position = Vector2( 656, 144 )
+collision_layer = 1
+speed = 100.0
 
 [node name="Furniture" type="TileMap" parent="Tilemaps/Walls"]
 tile_set = SubResource( 36 )
@@ -92,10 +97,6 @@ tile_data = PoolIntArray( 196634, 0, 0, 262149, 0, 0, 262161, 0, 0, 393243, 0, 0
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="Guard" parent="Tilemaps/Walls" instance=ExtResource( 11 )]
-position = Vector2( 656, 144 )
-collision_layer = 1
 
 [node name="Decoration" type="TileMap" parent="Tilemaps"]
 tile_set = ExtResource( 2 )
