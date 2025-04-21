@@ -15,11 +15,6 @@ _global_script_classes=[ {
 "path": "res://characters/character.gd"
 }, {
 "base": "Character",
-"class": "Guard",
-"language": "GDScript",
-"path": "res://characters/guard/guard.gd"
-}, {
-"base": "Character",
 "class": "Player",
 "language": "GDScript",
 "path": "res://characters/player/player.gd"
@@ -46,7 +41,6 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Character": "",
-"Guard": "",
 "Player": "",
 "PutZone": "",
 "Rule": "",

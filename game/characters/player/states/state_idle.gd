@@ -1,8 +1,9 @@
 extends State
 
+onready var _owner:Character = owner
 
 func enter():
-	(character.get_node("AnimationTree")["parameters/playback"] as AnimationNodeStateMachinePlayback).travel("Idle")
+	(_owner.get_node("AnimationTree")["parameters/playback"] as AnimationNodeStateMachinePlayback).travel("Idle")
 	pass
 
 
