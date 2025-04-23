@@ -5,9 +5,9 @@ func enter():
 	pass
 
 func process(_delta):
-	check_rules()
 	var _owner = owner as Player
 	if _owner.move_to():
+		_owner.world_position = Vector2()
 		_owner.state_factory.pop_state()
 
 

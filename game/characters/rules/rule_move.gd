@@ -1,5 +1,6 @@
 extends Rule
 
+
 func check():
 	var _owner = owner as Player
 	var level = _owner.level
@@ -10,10 +11,10 @@ func check():
 	if input_direction.length_squared():
 		if input_direction.x and input_direction.y:
 			return
-
-	if input_direction.length_squared() == 0.0:
+	else:
 		return
-	var valid_direction = level.get_valid_direction(owner.global_position, input_direction)
+	var valid_direction = level.get_valid_direction(_owner.global_position, input_direction)
 	if valid_direction:
 		_owner.world_position = valid_direction
+		_owner.path.clear()
 		_owner.state_factory.push_state("Move")

@@ -23,7 +23,7 @@ func move_to() -> bool:
 	return false
 
 
-func get_anim_state_machine():
+func get_animation_state_machine():
 	return $AnimationTree["parameters/playback"]
 
 

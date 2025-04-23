@@ -17,14 +17,16 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	state.check_rules()
 	state.process(delta)
 
 
 func change_state(new_state: String):
 	if not state:
 		return
-	state.exit
-	states_stack[0] = _states_dic[new_state]
+	state.exit()
+	states_stack.clear()
+	states_stack.push_front(_states_dic[new_state])
 	state = states_stack[0]
 	state.enter()
 

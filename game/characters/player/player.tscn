@@ -1,13 +1,14 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://characters/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/player/player.gd" type="Script" id=2]
 [ext_resource path="res://characters/player/player_spriteframes.tres" type="SpriteFrames" id=3]
 [ext_resource path="res://fsm/state_factory.tscn" type="PackedScene" id=4]
 [ext_resource path="res://characters/player/states/idle.tscn" type="PackedScene" id=5]
-[ext_resource path="res://characters/states/move.tscn" type="PackedScene" id=6]
-[ext_resource path="res://characters/player/states/idle.gd" type="Script" id=7]
-[ext_resource path="res://characters/rules/RuleMove.tscn" type="PackedScene" id=8]
+[ext_resource path="res://characters/player/states/put.tscn" type="PackedScene" id=6]
+[ext_resource path="res://characters/states/follow.tscn" type="PackedScene" id=7]
+[ext_resource path="res://characters/player/rules/rule_walk.gd" type="Script" id=8]
+[ext_resource path="res://components/input_component.tscn" type="PackedScene" id=10]
 
 [sub_resource type="Animation" id=3]
 resource_name = "IdleDown"
@@ -217,8 +218,15 @@ parameters/Idle/blend_position = Vector2( 0, 1 )
 [node name="StateFactory" parent="." index="4" instance=ExtResource( 4 )]
 
 [node name="Idle" parent="StateFactory" index="0" instance=ExtResource( 5 )]
-script = ExtResource( 7 )
 
-[node name="RuleMove" parent="StateFactory/Idle" index="0" instance=ExtResource( 8 )]
+[node name="Rule" type="Node" parent="StateFactory/Idle" index="0"]
+script = ExtResource( 8 )
 
-[node name="Move" parent="StateFactory" index="1" instance=ExtResource( 6 )]
+[node name="Follow" parent="StateFactory" index="1" instance=ExtResource( 7 )]
+
+[node name="Rule" type="Node" parent="StateFactory/Follow" index="0"]
+script = ExtResource( 8 )
+
+[node name="Put" parent="StateFactory" index="2" instance=ExtResource( 6 )]
+
+[node name="InputComponent" parent="." index="5" instance=ExtResource( 10 )]
