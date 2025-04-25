@@ -1,16 +1,26 @@
 extends State
 
-
-# Declare member variables here. Examples:
-# var a: int = 2
-# var b: String = "text"
+signal put_ended
+var put_time: float
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	anim_name = "Put"
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-#	pass
+func enter():
+	assert(connect("put_ended", owner, "on_put_ended") == OK, Globals.MSG_SIGNAL_NOT_CONNECTED)
+
+
+func process(delta:float):
+	if put_time <= 0.0:
+		emit_signal("put_ended")
+		var _owner: Player = owner
+		_owner.state_factory.change_state("Idle")
+	put_time -= delta
+	pass
+
+
+func exit():
+	disconnect("put_ended", owner, "on_put_ended")
+	pass
