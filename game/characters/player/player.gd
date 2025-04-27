@@ -4,7 +4,6 @@ class_name Player
 onready var input_component: Node2D = $InputComponent
 
 func _ready() -> void:
-	world_position = global_position
 	blend_positions  = ["parameters/Walk/blend_position","parameters/Idle/blend_position","parameters/Put/blend_position"]
 	state_factory.change_state("Idle")
 

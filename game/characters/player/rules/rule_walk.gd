@@ -15,13 +15,12 @@ func check():
 		if input_direction.length_squared():
 			if input_direction.x and input_direction.y:
 				return
-			#input_global_position = level.get_valid_direction(_owner.global_position, input_direction)
 			input_global_position = _owner.global_position + input_direction * level.cell_size
 		else:
 			return
 	if input_global_position.length_squared():
 		var path_array:Array = level.get_astar_path(_owner.global_position, input_global_position)
-		if path_array.size():
+		if path_array.size() > 1:
 			if _owner.path:
 				_owner.path.clear()
 				_owner.state_factory.pop_state()
