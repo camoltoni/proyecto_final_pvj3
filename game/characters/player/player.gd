@@ -1,7 +1,5 @@
 extends Character
-class_name Player
-
-onready var input_component: Node2D = $InputComponent
+class_name Player,  "res://assets/icons/max.svg"
 
 func _ready() -> void:
 	blend_positions  = ["parameters/Walk/blend_position","parameters/Idle/blend_position","parameters/Put/blend_position"]

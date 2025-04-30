@@ -4,13 +4,16 @@
 [ext_resource path="res://characters/player/player.gd" type="Script" id=2]
 [ext_resource path="res://characters/player/player_spriteframes.tres" type="SpriteFrames" id=3]
 [ext_resource path="res://fsm/state_factory.tscn" type="PackedScene" id=4]
-[ext_resource path="res://characters/player/states/idle.tscn" type="PackedScene" id=5]
-[ext_resource path="res://characters/player/states/put.tscn" type="PackedScene" id=6]
+[ext_resource path="res://characters/player/states/idle_player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://characters/player/states/put_player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://characters/states/follow.tscn" type="PackedScene" id=7]
-[ext_resource path="res://characters/player/rules/rule_put.gd" type="Script" id=8]
-[ext_resource path="res://characters/player/rules/rule_walk.tscn" type="PackedScene" id=9]
+[ext_resource path="res://characters/player/rules/rule_put.tscn" type="PackedScene" id=8]
+[ext_resource path="res://characters/player/rules/rule_follow.tscn" type="PackedScene" id=9]
 [ext_resource path="res://components/input_component.tscn" type="PackedScene" id=10]
-[ext_resource path="res://characters/states/move.gd" type="Script" id=11]
+
+[sub_resource type="CapsuleShape2D" id=37]
+radius = 12.0
+height = 22.0
 
 [sub_resource type="Animation" id=3]
 resource_name = "IdleDown"
@@ -161,8 +164,9 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=8]
 resource_name = "WalkDown"
-length = 0.6
+length = 0.18
 loop = true
+step = 0.03
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:frame")
 tracks/0/interp = 1
@@ -170,7 +174,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"times": PoolRealArray( 0, 0.03, 0.06, 0.09, 0.12, 0.15 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 42, 43, 44, 45, 46, 47 ]
@@ -178,8 +182,9 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=9]
 resource_name = "WalkLeft"
-length = 0.6
+length = 0.18
 loop = true
+step = 0.03
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:frame")
 tracks/0/interp = 1
@@ -187,7 +192,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"times": PoolRealArray( 0, 0.03, 0.06, 0.09, 0.12, 0.15 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 36, 37, 38, 39, 40, 41 ]
@@ -195,8 +200,9 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=6]
 resource_name = "WalkRight"
-length = 0.6
+length = 0.18
 loop = true
+step = 0.03
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:frame")
 tracks/0/interp = 1
@@ -204,7 +210,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"times": PoolRealArray( 0, 0.03, 0.06, 0.09, 0.12, 0.15 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 24, 25, 26, 27, 28, 29 ]
@@ -212,8 +218,9 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=7]
 resource_name = "WalkUp"
-length = 0.6
+length = 0.18
 loop = true
+step = 0.03
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:frame")
 tracks/0/interp = 1
@@ -221,7 +228,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"times": PoolRealArray( 0, 0.03, 0.06, 0.09, 0.12, 0.15 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 30, 31, 32, 33, 34, 35 ]
@@ -324,6 +331,9 @@ collision_layer = 1
 collision_mask = 1
 script = ExtResource( 2 )
 
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource( 37 )
+
 [node name="AnimatedSprite" parent="." index="1"]
 frames = ExtResource( 3 )
 frame = 0
@@ -358,17 +368,13 @@ parameters/Walk/blend_position = Vector2( -0.998355, 0 )
 
 [node name="RuleWalk" parent="StateFactory/Idle" index="0" instance=ExtResource( 9 )]
 
-[node name="RulePut" type="Node" parent="StateFactory/Idle" index="1"]
-script = ExtResource( 8 )
+[node name="RulePut" parent="StateFactory/Idle" index="1" instance=ExtResource( 8 )]
 
 [node name="Follow" parent="StateFactory" index="1" instance=ExtResource( 7 )]
 
 [node name="RuleWalk" parent="StateFactory/Follow" index="0" instance=ExtResource( 9 )]
 
-[node name="Move" type="Node" parent="StateFactory" index="2"]
-script = ExtResource( 11 )
-
-[node name="Put" parent="StateFactory" index="3" instance=ExtResource( 6 )]
+[node name="Put" parent="StateFactory" index="2" instance=ExtResource( 6 )]
 
 [node name="RuleWalk" parent="StateFactory/Put" index="0" instance=ExtResource( 9 )]
 

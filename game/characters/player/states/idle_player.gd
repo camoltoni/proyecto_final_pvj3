@@ -13,3 +13,15 @@ func process(_delta):
 
 func exit():
 	pass
+
+
+func to_follow():
+	var _owner: Player = owner
+	_owner.state_factory.push_state("Follow")
+	pass
+
+
+func to_put():
+	var _owner: Player = owner
+	_owner.state_factory.push_state("Put")
+

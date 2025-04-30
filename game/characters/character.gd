@@ -12,7 +12,7 @@ var blend_positions: Array
 var path:Array
 
 
-export var speed: float = 200.0
+export var speed: float = 178.0
 
 func move_to() -> bool:
 	global_position = global_position.move_toward(path[0], get_process_delta_time() * speed)

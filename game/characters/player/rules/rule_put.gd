@@ -7,5 +7,6 @@ func check():
 		if areas:
 			for area in areas:
 				if area.is_in_group("put"):
-					_owner.state_factory.change_state("Put")
+					get_parent().to_put()
 					_owner.state_factory.state.put_time = (area as PutZone).time_to_put
+

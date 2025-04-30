@@ -1,6 +1,8 @@
 extends Rule
 
-func check(params:Dictionary, character:Character):
-	var guard: = character as Guard
-	if params.has("seen"):
-		guard.state_factory.change_state("Chase")
+func check():
+	var _owner: Guard = owner
+	if _owner.seeing() and !_owner.seen:
+		_owner.seen = true
+		print_debug("seeing")
+	

@@ -16,7 +16,7 @@ func process(delta:float):
 	if put_time <= 0.0:
 		emit_signal("put_ended")
 		var _owner: Player = owner
-		_owner.state_factory.change_state("Idle")
+		_owner.state_factory.pop_state()
 	put_time -= delta
 	pass
 
@@ -24,3 +24,9 @@ func process(delta:float):
 func exit():
 	disconnect("put_ended", owner, "on_put_ended")
 	pass
+
+
+func to_follow():
+	var _owner: Character = owner
+	_owner.state_factory.pop_state()
+	_owner.state_factory.push_state("Follow")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://characters/player/draw_path.gd" type="Script" id=1]
 [ext_resource path="res://levels/tilesets/floor_orange_tileset.tres" type="TileSet" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://levels/astar_navigation.gd" type="Script" id=8]
 [ext_resource path="res://characters/player/player.tscn" type="PackedScene" id=9]
 [ext_resource path="res://levels/items/Item01.tscn" type="PackedScene" id=10]
+[ext_resource path="res://characters/guard/guard.tscn" type="PackedScene" id=11]
+[ext_resource path="res://levels/camera_2d.gd" type="Script" id=12]
 
 [sub_resource type="ConvexPolygonShape2D" id=37]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -45,7 +47,7 @@ __meta__ = {
 
 [node name="Background" type="Polygon2D" parent="."]
 color = Color( 0.776471, 0.776471, 0.776471, 1 )
-polygon = PoolVector2Array( 0, 0, 1024, 0, 1024, 600, 0, 600 )
+polygon = PoolVector2Array( 0, 0, 1024, 0, 1024, 608, 0, 608 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -88,6 +90,20 @@ __meta__ = {
 
 [node name="Player" parent="Tilemaps/Walls" instance=ExtResource( 9 )]
 position = Vector2( 176, 80 )
+
+[node name="Camera2D" type="Camera2D" parent="Tilemaps/Walls/Player"]
+current = true
+limit_left = 0
+limit_top = 0
+limit_right = 1024
+limit_bottom = 608
+limit_smoothed = true
+editor_draw_limits = true
+editor_draw_drag_margin = true
+script = ExtResource( 12 )
+
+[node name="Guard" parent="Tilemaps/Walls" instance=ExtResource( 11 )]
+position = Vector2( 688, 208 )
 
 [node name="Decoration" type="TileMap" parent="Tilemaps"]
 tile_set = ExtResource( 2 )

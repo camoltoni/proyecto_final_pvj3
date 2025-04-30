@@ -9,6 +9,8 @@ func check():
 	if Input.is_action_just_pressed("level_click"):
 		input_global_position = _owner.get_global_mouse_position()
 	else:
+		if _owner.path.size() == 1:
+			return
 		var input_direction = Vector2()
 		input_direction.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 		input_direction.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
@@ -23,7 +25,8 @@ func check():
 		if path_array.size() > 1:
 			if _owner.path:
 				_owner.path.clear()
-				_owner.state_factory.pop_state()
+				#_owner.state_factory.pop_state()
 			_owner.path = path_array.slice(1, path_array.size()-1)
 		if _owner.path.size():
-			_owner.state_factory.push_state("Follow")
+			get_parent().to_follow()
+			#_owner.state_factory.push_state("Follow")

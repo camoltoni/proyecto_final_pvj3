@@ -21,3 +21,9 @@ func process(_delta):
 func exit():
 	var _owner: Character = owner
 	_owner.path.clear()
+
+
+func to_follow():
+	var _owner: Character = owner
+	_owner.state_factory.pop_state()
+	_owner.state_factory.push_state("Follow")
