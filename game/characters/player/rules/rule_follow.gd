@@ -2,7 +2,7 @@ extends Rule
 
 
 func check():
-	var _owner = owner as Player
+	var _owner: Character = owner
 	var level = _owner.level
 
 	var input_global_position: Vector2 = Vector2()
@@ -25,8 +25,6 @@ func check():
 		if path_array.size() > 1:
 			if _owner.path:
 				_owner.path.clear()
-				#_owner.state_factory.pop_state()
 			_owner.path = path_array.slice(1, path_array.size()-1)
 		if _owner.path.size():
 			get_parent().to_follow()
-			#_owner.state_factory.push_state("Follow")

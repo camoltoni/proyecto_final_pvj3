@@ -19,8 +19,7 @@ func process(_delta):
 
 
 func exit():
-	var _owner: Character = owner
-	_owner.path.clear()
+	pass
 
 
 func to_follow():

@@ -9,6 +9,5 @@ func _ready() -> void:
 	print_debug(walls.map_size * walls.cell_size)
 
 func _on_size_changed():
-	
 	pass
 

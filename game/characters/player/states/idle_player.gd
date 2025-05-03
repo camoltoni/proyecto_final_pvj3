@@ -7,6 +7,7 @@ func enter():
 	#(_owner.get_animation_state_machine() as AnimationNodeStateMachinePlayback).travel("Idle")
 	pass
 
+var epa: int = 0
 func process(_delta):
 	pass
 

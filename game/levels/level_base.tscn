@@ -90,6 +90,7 @@ __meta__ = {
 
 [node name="Player" parent="Tilemaps/Walls" instance=ExtResource( 9 )]
 position = Vector2( 176, 80 )
+z_index = 4
 
 [node name="Camera2D" type="Camera2D" parent="Tilemaps/Walls/Player"]
 current = true

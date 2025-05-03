@@ -18,6 +18,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	state.check_rules()
+	#for s in states_stack:
+	#	(s as State).process(delta)
 	state.process(delta)
 
 

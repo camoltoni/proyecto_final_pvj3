@@ -18,3 +18,8 @@ func process(delta):
 
 func exit():
 	pass
+
+
+func to_chase():
+	var guard: Character = owner
+	guard.state_factory.change_state("Chase")

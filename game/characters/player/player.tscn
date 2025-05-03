@@ -366,16 +366,16 @@ parameters/Walk/blend_position = Vector2( -0.998355, 0 )
 
 [node name="Idle" parent="StateFactory" index="0" instance=ExtResource( 5 )]
 
-[node name="RuleWalk" parent="StateFactory/Idle" index="0" instance=ExtResource( 9 )]
+[node name="RuleFollow" parent="StateFactory/Idle" index="0" instance=ExtResource( 9 )]
 
 [node name="RulePut" parent="StateFactory/Idle" index="1" instance=ExtResource( 8 )]
 
 [node name="Follow" parent="StateFactory" index="1" instance=ExtResource( 7 )]
 
-[node name="RuleWalk" parent="StateFactory/Follow" index="0" instance=ExtResource( 9 )]
+[node name="RuleFollow" parent="StateFactory/Follow" index="0" instance=ExtResource( 9 )]
 
 [node name="Put" parent="StateFactory" index="2" instance=ExtResource( 6 )]
 
-[node name="RuleWalk" parent="StateFactory/Put" index="0" instance=ExtResource( 9 )]
+[node name="RuleFollow" parent="StateFactory/Put" index="0" instance=ExtResource( 9 )]
 
 [node name="InputComponent" parent="." index="5" instance=ExtResource( 10 )]
